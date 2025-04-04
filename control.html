@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Z-Tech Home – control page</title>
+    <style>
+        body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+        .ahlan {
+            background-color: blueviolet;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+        .welcome-text {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .hab {
+      background-color: #ffd1dc;
+      color: #333;
+      text-align: center;
+      font-size: 20px;
+      padding: 20px 30px;
+      margin: 30px auto;
+      width: fit-content;
+      max-width: 90%;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      font-family: "Tahoma", sans-serif;
+      direction: rtl;
+    }
+    .haby {
+    background-color: #20d873;
+    color: #333;
+    text-align: center;
+    font-size: 20px;
+    padding: 20px 30px;
+    margin: 30px auto;
+    width: fit-content;
+    max-width: 90%;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: "Tahoma", sans-serif;
+    direction: rtl;
+    font-weight: bold; /* This makes the font bold */
+}
+
+        .himage {
+            position: relative;
+            width: 100%;
+            max-width: 1000px; /* Make sure the image and buttons fit */
+            margin: 0 auto;
+        }
+
+        .himage img {
+            width: 100%;
+            height: auto;
+        }
+        .buttons-container {
+            display: flex; /* يجعل الأزرار بجانب بعض */
+            gap: 10px; /* المسافة بين الأزرار */
+            justify-content: center; /* محاذاة الأزرار في المنتصف */
+            margin-top: 20px;
+        }
+
+        .button1 {
+            padding: 10px 20px;
+            background-color: #4CAF50; /* لون الخلفية */
+            color: white;
+            text-decoration: none; /* إزالة التسطير */
+            border-radius: 15px;
+            font-size: 45px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: #45a049; /* تغيير اللون عند التمرير فوق الزر */
+        }
+
+        .button {
+            position: absolute;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Transparent background */
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .button1 {
+            top: 25%;
+            left: 30%;
+        }
+
+        .button2 {
+            top: 70%;
+            left: 40%;
+        }
+
+        .button3 {
+            top: 30%;
+            left: 70%;
+        }
+
+        .button:hover {
+            background-color: rgba(0, 0, 0, 0.7); /* Darken when hovered */
+        }
+
+
+        .butt1 {
+            top: 25%;
+            left: 30%;
+        }
+
+        .butt2 {
+            top: 70%;
+            left: 40%;
+        }
+
+        .butt3 {
+            top: 30%;
+            left: 70%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ahlan">
+        <span class="welcome-text">Ya 500 Ahlan w Sahlan</span>
+        <img src="https://pbs.twimg.com/media/DqitFYNXQAIKgMw.jpg" width="200" alt="Welcome Image" />
+    </div>
+
+     <div class="haby">
+        هوِّن على نفسك.. فوالله.. إذا أراد الله؛
+        ما منع مانعٌ، ولا حجب حاجبٌ. <br> <br> 
+        
+        إذا أراد الله؛<br><br> 
+        جاءتك الأماني خفيفةً، وصارت لك المستحيلات حقيقةً.<br><br> 
+        
+        ﴿إِنَّمَا أَمْرُهُ إِذَا أَرَادَ شَيْئًا أَن يَقُولَ لَهُ كُن فَيَكُونُ﴾  <br> <br>     </div>
+    
+    <div class="hab">
+       بنتحكم هنا في الإنارة .. مؤقتا عشان مش فاضي :( 
+      </div>
+
+     
+    <div class="himage">
+        <img src="https://i.postimg.cc/0Nr4vLQz/House.jpg" alt="House Image" width="1000">
+        <button class="button button1" onclick="navigateTo('https://example1.com')">Room</button>
+        <button class="button button2" onclick="navigateTo('https://example2.com')">Garden</button>
+        <button class="button button3" onclick="navigateTo('https://example3.com')">garage</button>
+        <hr />
+    </div>
+
+    <div class="haby">
+        "تخيل أن تجدَ ضالَّتكَ في عالمٍ، كلُ شيءٍ فيه يدعو للتيهِ!
+
+        أن تأنسَ ويؤنسُ بكَ، وتأمنَ ويؤمنُ بكَ 
+        أن يُباع كلُ شيءٍ ويُشترى خاطِركَ 
+        أن يُكتفى بوجودِك، فـ يهون كلُ<br> <br> 
+         شيءٍ ولا تهونُ أنتَ
+        أن تبارُككَ علاقةً، وتزيدُك امتنانًا لخالقِك
+        أن تتكيءَ للمرةِ الأولى وأنت لا تخشى السقوط.
+        
+        أن يجبركَ وجود أحدهم 
+        لأن تُحِبَّ نفسكَ مجددًا وتراها أهلًا للمحبةِ."🤍   
+    
+    </div>
+
+    
+    <div>
+        <div class="buttons-container">
+            <a href="https://technoo9090.sarhne.com/" class="button1 butt1">sarhne</a>
+            <a href="https://www.facebook.com/share/19JygrjuiW/" class="button1 butt2">facebook</a>
+            <a href="asrar.html" class="button1 butt3">لو عاوز تعرف مين مقصود بالكلام</a>
+        </div>
+</body>
+
+</html>
