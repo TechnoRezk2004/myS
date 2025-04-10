@@ -7,11 +7,12 @@
     <title>Z-Tech Home – control page</title>
     <style>
         body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f5f5f5;
-    }
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
         .ahlan {
             background-color: blueviolet;
             color: white;
@@ -22,44 +23,36 @@
             padding: 20px;
             text-align: center;
         }
+
         .welcome-text {
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .hab {
-      background-color: #ffd1dc;
-      color: #333;
-      text-align: center;
-      font-size: 20px;
-      padding: 20px 30px;
-      margin: 30px auto;
-      width: fit-content;
-      max-width: 90%;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      font-family: "Tahoma", sans-serif;
-      direction: rtl;
-    }
-    .haby {
-    background-color: #20d873;
-    color: #333;
-    text-align: center;
-    font-size: 20px;
-    padding: 20px 30px;
-    margin: 30px auto;
-    width: fit-content;
-    max-width: 90%;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    font-family: sans-serif;
-    direction: rtl;
-    font-weight: bold; /* This makes the font bold */
-}
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .hab, .haby {
+            background-color: #ffd1dc;
+            color: #333;
+            text-align: center;
+            font-size: 20px;
+            padding: 20px 30px;
+            margin: 30px auto;
+            width: fit-content;
+            max-width: 90%;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-family: Tahoma, sans-serif;
+            direction: rtl;
+        }
+
+        .haby {
+            background-color: #20d873;
+            font-weight: bold;
+        }
 
         .himage {
             position: relative;
             width: 100%;
-            max-width: 1000px; /* Make sure the image and buttons fit */
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -67,37 +60,21 @@
             width: 100%;
             height: auto;
         }
-        .buttons-container {
-            display: flex; /* يجعل الأزرار بجانب بعض */
-            gap: 10px; /* المسافة بين الأزرار */
-            justify-content: center; /* محاذاة الأزرار في المنتصف */
-            margin-top: 20px;
-        }
-
-        .button1 {
-            padding: 10px 20px;
-            background-color: #4CAF50; /* لون الخلفية */
-            color: white;
-            text-decoration: none; /* إزالة التسطير */
-            border-radius: 15px;
-            font-size: 45px;
-            text-align: center;
-            display: inline-block;
-        }
-
-        .button:hover {
-            background-color: #45a049; /* تغيير اللون عند التمرير فوق الزر */
-        }
 
         .button {
             position: absolute;
             padding: 10px 20px;
-            background-color: rgba(0, 0, 0, 0.5); /* Transparent background */
+            background-color: rgba(0, 0, 0, 0.5);
             color: white;
             border: none;
             cursor: pointer;
             font-size: 16px;
             text-align: center;
+            border-radius: 10px;
+        }
+
+        .button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
         .button1 {
@@ -115,26 +92,55 @@
             left: 70%;
         }
 
-        .button:hover {
-            background-color: rgba(0, 0, 0, 0.7); /* Darken when hovered */
+        .buttons-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
         }
 
-
-        .butt1 {
-            top: 25%;
-            left: 30%;
-        }
-
-        .butt2 {
-            top: 70%;
-            left: 40%;
-        }
-
-        .butt3 {
-            top: 30%;
-            left: 70%;
+        .button1x {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 15px;
+            font-size: 20px;
+            text-align: center;
+            text-decoration: none;
         }
     </style>
+
+    <script>
+        const ESP_IP = "http://192.168.1.100"; // Replace with your ESP8266 IP
+        const ledStates = {
+            1: false,
+            2: false,
+            3: false
+        };
+
+        function toggleLED(led, button) {
+            const newState = ledStates[led] ? 'off' : 'on';
+            fetch(`${ESP_IP}/led${led}/${newState}`)
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.text();
+                })
+                .then(data => {
+                    ledStates[led] = !ledStates[led];
+                    button.textContent = ledStates[led] ? `Turn OFF ${getRoomName(led)}` : `Turn ON ${getRoomName(led)}`;
+                })
+                .catch(error => console.error("Error:", error));
+        }
+
+        function getRoomName(led) {
+            switch (led) {
+                case 1: return "Room";
+                case 2: return "Garden";
+                case 3: return "Garage";
+                default: return "Unknown";
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -143,46 +149,30 @@
         <img src="https://pbs.twimg.com/media/DqitFYNXQAIKgMw.jpg" width="200" alt="Welcome Image" />
     </div>
 
-     <div class="haby">
-        هوِّن على نفسك.. فوالله.. إذا أراد الله؛
-        ما منع مانعٌ، ولا حجب حاجبٌ. <br> <br> 
-        
-        إذا أراد الله؛<br><br> 
-        جاءتك الأماني خفيفةً، وصارت لك المستحيلات حقيقةً.<br><br> 
-        
-        ﴿إِنَّمَا أَمْرُهُ إِذَا أَرَادَ شَيْئًا أَن يَقُولَ لَهُ كُن فَيَكُونُ﴾  <br> <br>     </div>
-    
-    <div class="hab">
-       بنتحكم هنا في الإنارة .. مؤقتا عشان مش فاضي :( 
-      </div>
+    <div class="haby">
+        هوِّن على نفسك.. فوالله.. إذا أراد الله؛ ما منع مانعٌ، ولا حجب حاجبٌ.
+        <br><br>إذا أراد الله؛<br><br>جاءتك الأماني خفيفةً، وصارت لك المستحيلات حقيقةً.<br><br>
+        ﴿إِنَّمَا أَمْرُهُ إِذَا أَرَادَ شَيْئًا أَن يَقُولَ لَهُ كُن فَيَكُونُ﴾
+    </div>
 
-     
+    <div class="hab">بنتحكم هنا في الإنارة .. مؤقتا عشان مش فاضي :(</div>
+
     <div class="himage">
-        <img src="https://i.postimg.cc/0Nr4vLQz/House.jpg" alt="House Image" width="1000">
-        <button class="button button1" onclick="navigateTo('https://example1.com')">Room</button>
-        <button class="button button2" onclick="navigateTo('https://example2.com')">Garden</button>
-        <button class="button button3" onclick="navigateTo('https://example3.com')">garage</button>
-        <hr />
+        <img src="https://i.postimg.cc/0Nr4vLQz/House.jpg" alt="House Image">
+        <button class="button button1" onclick="toggleLED(1, this)">Turn ON Room</button>
+        <button class="button button2" onclick="toggleLED(2, this)">Turn ON Garden</button>
+        <button class="button button3" onclick="toggleLED(3, this)">Turn ON Garage</button>
     </div>
 
     <div class="haby">
-
-        اللهم ءاتي نفسي تقواها وزكّها أنت خير من زكّاها
-أنت وليّها ومولاها
-اللهم إني أعوذ بك من الهم والحزن والعجز والكسل والجبن والبخل واعوذ بك من غلبة الدين وقهر الرجال
-<br>
-اللهم اقسم لنا من خشيتك ما تحول به بيننا وبين معصيتك 
-ومن طاعتك ما تبلغنا به جنّتك ومن اليقين ما تهوّن به علينا مصائب الدنيا ومتّعنا اللهم بأسماعنا وأبصارنا وقوّاتنا أبداً ما ابقيتنا 
-اجعله الوارث منّا واجعل ثأرنا على من ظلمنا وانصرنا على من عادانا ولا تسلّط علينا بذنوبنا من لا يخافك ولا يرحمنا 
+        اللهم ءاتي نفسي تقواها وزكّها أنت خير من زكّاها...
     </div>
 
-    
-    <div>
-        <div class="buttons-container">
-            <a href="https://technoo9090.sarhne.com/" class="button1 butt1">sarhne</a>
-            <a href="https://www.facebook.com/share/19JygrjuiW/" class="button1 butt2">facebook</a>
-            <a href="asrar.html" class="button1 butt3">لو عاوز تعرف مين مقصود بالكلام</a>
-        </div>
+    <div class="buttons-container">
+        <a href="https://technoo9090.sarhne.com/" class="button1x">sarhne</a>
+        <a href="https://www.facebook.com/share/19JygrjuiW/" class="button1x">facebook</a>
+        <a href="asrar.html" class="button1x">لو عاوز تعرف مين مقصود بالكلام</a>
+    </div>
 </body>
 
 </html>
