@@ -1,39 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Z-Tech Home – control page</title>
     <style>
+        /* تنسيق عام للصفحة */
         body {
-            font-family: sans-serif;
+            font-family: 'Tahoma', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f5f5f5;
+            color: #333;
+            direction: rtl;
+            text-align: center;
         }
 
+        /* شريط الترحيب */
         .ahlan {
             background: linear-gradient(to right, #6a11cb, #2575fc);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 25px;
-      font-size: 22px;
-      font-weight: bold;
-      border-radius: 0 0 20px 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      direction: rtl;
-      text-align: center;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            font-size: 22px;
+            font-weight: bold;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
+        /* نصوص الترحيب */
         .welcome-text {
             font-size: 24px;
             font-weight: bold;
         }
 
-        .hab, .haby {
+        /* عبارة التحكم */
+        .hab {
             background-color: #ffd1dc;
             color: #333;
             text-align: center;
@@ -44,15 +49,23 @@
             max-width: 90%;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            font-family: Tahoma, sans-serif;
-            direction: rtl;
         }
 
+        /* نصوص حكم ابن القيم */
         .haby {
             background-color: #20d873;
-            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            font-size: 20px;
+            padding: 20px 30px;
+            margin: 30px auto;
+            width: fit-content;
+            max-width: 90%;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
+        /* صورة المنزل */
         .himage {
             position: relative;
             width: 100%;
@@ -63,8 +76,10 @@
         .himage img {
             width: 100%;
             height: auto;
+            border-radius: 10px;
         }
 
+        /* أزرار التحكم */
         .button {
             position: absolute;
             padding: 10px 20px;
@@ -96,6 +111,7 @@
             left: 70%;
         }
 
+        /* حاوية الأزرار الخارجية */
         .buttons-container {
             display: flex;
             gap: 10px;
@@ -103,6 +119,7 @@
             margin-top: 20px;
         }
 
+        /* أزرار الروابط */
         .button1x {
             padding: 10px 20px;
             background-color: #4CAF50;
@@ -111,11 +128,17 @@
             font-size: 20px;
             text-align: center;
             text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .button1x:hover {
+            background-color: #45a049;
         }
     </style>
 
+    <!-- جافا سكريبت للتحكم بالإضاءة -->
     <script>
-        const ESP_IP = "http://192.168.1.100"; // Replace with your ESP8266 IP
+        const ESP_IP = "http://192.168.1.100"; // استبدل بـ IP الخاص بجهاز ESP8266
         const ledStates = {
             1: false,
             2: false,
@@ -131,55 +154,60 @@
                 })
                 .then(data => {
                     ledStates[led] = !ledStates[led];
-                    button.textContent = ledStates[led] ? `Turn OFF ${getRoomName(led)}` : `Turn ON ${getRoomName(led)}`;
+                    button.textContent = ledStates[led] ? `إطفاء ${getRoomName(led)}` : `تشغيل ${getRoomName(led)}`;
                 })
                 .catch(error => console.error("Error:", error));
         }
 
         function getRoomName(led) {
             switch (led) {
-                case 1: return "Room";
-                case 2: return "Garden";
-                case 3: return "Garage";
-                default: return "Unknown";
+                case 1: return "الغرفة";
+                case 2: return "الحديقة";
+                case 3: return "المرآب";
+                default: return "غير معروف";
             }
         }
     </script>
 </head>
 
 <body>
+    <!-- شريط الترحيب -->
     <div class="ahlan">
-        <span class="welcome-text">الله يغضب إن تركت سؤاله
-وبني أدم إن سألته يغضب</span>
+        <span class="welcome-text">الله يغضب إن تركت سؤاله<br>وبني آدم إن سألته يغضب</span>
     </div>
 
-   
+    <!-- عبارة التحكم -->
+    <div class="hab">بنتحكم هنا في الإنارة .. مؤقتًا عشان مش فاضي :(</div>
 
-    <div class="hab">بنتحكم هنا في الإنارة .. مؤقتا عشان مش فاضي :(</div>
-
+    <!-- صورة المنزل مع أزرار التحكم -->
     <div class="himage">
         <img src="https://i.postimg.cc/0Nr4vLQz/House.jpg" alt="House Image">
-        <button class="button button1" onclick="toggleLED(1, this)">Turn ON Room</button>
-        <button class="button button2" onclick="toggleLED(2, this)">Turn ON Garden</button>
-        <button class="button button3" onclick="toggleLED(3, this)">Turn ON Garage</button>
-    </div>
- <div class="haby">
-        هوِّن على نفسك.. فوالله.. إذا أراد الله؛ ما منع مانعٌ، ولا حجب حاجبٌ.
-        <br><br>إذا أراد الله؛<br><br>جاءتك الأماني خفيفةً، وصارت لك المستحيلات حقيقةً.<br><br>
-        ﴿إِنَّمَا أَمْرُهُ إِذَا أَرَادَ شَيْئًا أَن يَقُولَ لَهُ كُن فَيَكُونُ﴾
-    </div>
-    <hr />
-    <hr />
-    <div class="haby">
-فإن من أحب شيئًا غير الله عُذِّب به ولابد.
-فما في الأرض أشقى من محب، وإن وجَد الهوى حلواً المذاق.
-تراه باكيًا في كل حين، مخافة فرقة أو لاشتياق.
-فيبكي إن نأَوْا شوقًا إليهم، ويبكي إن دنَوْا حذر الفراق.
-فتسخن عينه عند الفراق، وتسخن عينه عند التلاقي.
-والعشق وإن اسْتعذبه العاشق، فهو من أعظم عذاب القلب.   <br />
-   من كتاب "الجواب الكافي لمن سأل عن الدواء الشافي" -- ابن القيم رحمه الله 
+        <button class="button button1" onclick="toggleLED(1, this)">تشغيل الغرفة</button>
+        <button class="button button2" onclick="toggleLED(2, this)">تشغيل الحديقة</button>
+        <button class="button button3" onclick="toggleLED(3, this)">تشغيل المرآب</button>
     </div>
 
+    <!-- حكم ابن القيم -->
+    <div class="haby">
+        هوِّن على نفسك.. فوالله.. إذا أراد الله؛ ما منع مانعٌ، ولا حجب حاجبٌ.<br><br>
+        إذا أراد الله؛<br><br>
+        جاءتك الأماني خفيفةً، وصارت لك المستحيلات حقيقةً.<br><br>
+        ﴿إِنَّمَا أَمْرُهُ إِذَا أَرَادَ شَيْئًا أَن يَقُولَ لَهُ كُن فَيَكُونُ﴾
+    </div>
+
+    <hr />
+
+    <div class="haby">
+        فإن من أحب شيئًا غير الله عُذِّب به ولابد.<br>
+        فما في الأرض أشقى من محب، وإن وجَد الهوى حلواً المذاق.<br>
+        تراه باكيًا في كل حين، مخافة فرقة أو لاشتياق.<br>
+        فيبكي إن نأَوْا شوقًا إليهم، ويبكي إن دنَوْا حذر الفراق.<br>
+        فتسخن عينه عند الفراق، وتسخن عينه عند التلاقي.<br>
+        والعشق وإن اسْتعذبه العاشق، فهو من أعظم عذاب القلب.<br><br>
+        من كتاب "الجواب الكافي لمن سأل عن الدواء الشافي" -- ابن القيم رحمه الله
+    </div>
+
+    <!-- أزرار الروابط -->
     <div class="buttons-container">
         <a href="https://technoo9090.sarhne.com/" class="button1x">sarhne</a>
         <a href="https://www.facebook.com/share/19JygrjuiW/" class="button1x">facebook</a>
