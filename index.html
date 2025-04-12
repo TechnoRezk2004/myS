@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Z-Tech Home – Main Page</title>
+  <title>Z-Tech Home – الصفحة الرئيسية</title>
   <style>
+    /* تنسيق عام للصفحة */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f0f4f8;
-      color: #333;
+      background-color: #f0f4f8; /* خلفية ناعمة */
+      color: #333; /* نص بلون داكن مريح */
+      direction: rtl;
+      text-align: center;
+      line-height: 1.6; /* تباعد أسطر مريح */
     }
 
+    /* شريط الترحيب */
     .ahlan {
-      background: linear-gradient(to right, #6a11cb, #2575fc);
+      background: linear-gradient(to right, #6a11cb, #2575fc); /* تدرج لون جميل */
       color: white;
       display: flex;
       justify-content: center;
@@ -25,12 +30,11 @@
       font-weight: bold;
       border-radius: 0 0 20px 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      direction: rtl;
-      text-align: center;
     }
 
+    /* عبارة التحكم */
     .hab {
-      background-color: #ffe6e6;
+      background-color: #ffe6e6; /* خلفية وردية فاتحة */
       color: #222;
       text-align: center;
       font-size: 20px;
@@ -39,36 +43,35 @@
       max-width: 700px;
       border-radius: 15px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      direction: rtl;
     }
 
+    /* حاوية الصورة */
     .himage {
+      position: relative;
       text-align: center;
       margin: 30px auto;
     }
 
     .himage img {
-      width: 320px;
-      max-width: 90%;
+      width: 100%;
+      max-width: 1000px; /* زيادة حجم الصورة */
+      height: auto;
       border-radius: 12px;
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
       transition: transform 0.3s ease;
     }
 
     .himage img:hover {
-      transform: scale(1.03);
+      transform: scale(1.03); /* تأثير تكبير عند التحويم */
     }
 
-    .himage hr {
-      width: 100%;
-      margin: 20px auto;
-      border: 1px solid #ccc;
-    }
-
-    .but {
-      display: inline-block;
-      margin: 20px auto;
-      background-color: #4CAF50;
+    /* زر التحكم أسفل الصورة */
+    .control-button {
+      position: absolute;
+      bottom: 20px; /* وضع الزر تحت الصورة */
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4CAF50; /* أخضر مريح */
       color: white;
       padding: 12px 25px;
       border: none;
@@ -76,15 +79,16 @@
       font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-       float: lift;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .but:hover {
-      background-color: #45a049;
+    .control-button:hover {
+      background-color: #45a049; /* تغيير اللون عند التحويم */
     }
 
+    /* حاوية الفريق */
     .team {
-      background-color: #dceeff;
+      background-color: #dceeff; /* خلفية زرقاء فاتحة */
       color: #333;
       border-radius: 15px;
       padding: 30px 50px;
@@ -95,7 +99,7 @@
     }
 
     .t {
-      background-color: royalblue;
+      background-color: royalblue; /* لون مميز للعنوان */
       color: white;
       border-radius: 10px;
       padding: 10px;
@@ -103,10 +107,30 @@
       font-size: 18px;
     }
 
+    /* تصميم الجدول */
+    .team table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      text-align: left; /* النصوص الآن على اليسار */
+      font-size: 16px;
+      direction: ltr; /* تغيير الاتجاه إلى اليسار */
+    }
 
- 
+    .team th,
+    .team td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+    }
 
-    /* تنسيق حاوية الفيديو */
+    .team th {
+      background-color: #cce7ff;
+      color: #333;
+      font-weight: bold;
+    }
+
+    /* حاوية الفيديو */
     .video-container {
       position: relative;
       width: 90%;
@@ -118,17 +142,17 @@
       transition: transform 0.3s ease-in-out;
     }
 
-    /* تأثير عند التحويم على الفيديو */
+    /* تأثير عند التحويم */
     .video-container:hover {
       transform: scale(1.02);
     }
 
-    /* تنسيق الفيديو نفسه */
-    video {
+    /* تنسيق iframe */
+    iframe {
       width: 100%;
-      height: auto;
+      height: 450px;
+      border: none;
       border-radius: 15px;
-      display: block;
     }
 
     /* زر تشغيل مخصص */
@@ -149,9 +173,8 @@
       transition: opacity 0.3s ease-in-out;
     }
 
-    /* ظهور زر التشغيل عند التحويم */
     .video-container:hover .play-button {
-      opacity: 1;
+      opacity: 1; /* ظهور الزر عند التحويم */
     }
 
     /* أيقونة التشغيل */
@@ -163,56 +186,39 @@
       border-left: 15px solid #ff4d4d;
     }
 
-    /* وصف الفيديو أسفل الفيديو */
+    /* وصف الفيديو */
     .video-description {
       text-align: center;
       margin-top: 15px;
       font-size: 18px;
       color: #333;
     }
-
-    
-    /* تعديلات على iframe */
-    iframe {
-      width: 100%;
-      height: 450px;
-      border: none;
-      border-radius: 15px;
-    }
   </style>
 </head>
 
 <body>
 
+  <!-- شريط الترحيب -->
   <div class="ahlan">
-     وليكن شعارك <br />
     🌟 استعن بالله ولا تعجز 🌟
   </div>
 
- 
-
-  
+  <!-- صورة المنزل وزر التحكم -->
   <div class="himage">
-    <a href="control.html" target="_blank">
-      <button class="but">Tap to Full Control</button>
-    </a>
-    <br><br>
     <img src="https://i.postimg.cc/0Nr4vLQz/House.jpg" alt="House Image">
-    <hr />
+    <a href="control.html" target="_blank">
+      <button class="control-button">Tap to Full Control</button>
+    </a>
   </div>
 
-  
- <!-- حاوية الفيديو -->
- <div class="video-container">
-    <!-- إضافة فيديو من YouTube -->
+  <!-- حاوية الفيديو -->
+  <div class="video-container">
     <iframe 
       src="https://www.youtube.com/embed/ZM9aUNeIzLU?si=Dptz13-nkVkblpPh?autoplay=1" 
       frameborder="0" 
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
       allowfullscreen>
     </iframe>
-  </div>
-
     <!-- زر تشغيل مخصص -->
     <div class="play-button">
       <div class="play-icon"></div>
@@ -221,36 +227,57 @@
 
   <!-- وصف الفيديو -->
   <div class="video-description">
-   ما تيسر من سورتي الزخرف والدخان -- من الحرم المكي بصوت الشخ ياسر الدوسري
+    ما تيسر من سورتي الزخرف والدخان -- من الحرم المكي بصوت الشيخ ياسر الدوسري
   </div>
 
-    <div class="hab">
-
-اللهم قاتل الكفرة الذين يكذبون رسلك ويصدون عن سبيلك ، واجعل عليهم رجزك وعذابك ، اللهم قاتل الكفرة الذين أوتوا الكتاب إله الحق  
-<br />
-    اللهم انه عز جارك وجل ثناؤك وتقدست اسماؤك . اللهم لا يهزم جندك ولا يخلف وعدك ولا ينفع ذا الجد منك الجد سبحانك وبحمدك  <br />
-اللهم منزل الكتاب مجري السحاب . هازم الاحزاب . انصر اخواننا المستضعفين في كل مكان . اللهم انصرهم نصرا عزيزا مؤزرا <br />
-  
-    اللهم اجعل لنا في تحرير الأقصى نصيب
+  <!-- دعاء -->
+  <div class="hab">
+    اللهم قاتل الكفرة الذين يكذبون رسلك ويصدون عن سبيلك، واجعل عليهم رجزك وعذابك، اللهم قاتل الكفرة الذين أوتوا الكتاب إله الحق.  
+    <br />
+    اللهم إنه عز جارك وجل ثناؤك وتقدست أسماؤك. اللهم لا يهزم جندك ولا يخلف وعدك ولا ينفع ذا الجد منك الجد سبحانك وبحمدك.
+    <br />
+    اللهم منزل الكتاب مجري السحاب هازم الأحزاب انصر إخواننا المستضعفين في كل مكان. اللهم انصرهم نصراً عزيزاً مؤزراً.
+    <br />
+    اللهم اجعل لنا في تحرير الأقصى نصيب.
   </div>
+
+  <!-- شكر الفريق -->
   <div class="team">
     <h4 class="t">Thanks to my team</h4>
-    <p>
-
-     
-
-      My dear team...<br />
-      Thank you for your cooperation and I hope to work together on the next project.
-    </p>
-    <p>"Thank You :)"</p>
-    <p>
-      Rezk Youssef<br />
-      Belal Wael<br />
-      Ebrahem<br />
-       Logain<br />
-      Basant Tarek<br />
-      Salma Ahmed
-    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th> <!-- اسم العمود بالإنجليزية -->
+          <th>ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Rezk Youssef</td>
+          <td>420230148</td>
+        </tr>
+        <tr>
+          <td>Belal Wael</td>
+          <td>420230124</td>
+        </tr>
+        <tr>
+          <td>Ibrahim Hassan Abdullah</td>
+          <td>420230088</td>
+        </tr>
+        <tr>
+          <td>Logain Elsayed Abdelfattah	 </td>
+          <td>420230233</td>
+        </tr>
+        <tr>
+          <td>Basant Tarek  El-Sayed</td>
+          <td>420230123</td>
+        </tr>
+        <tr>
+          <td>Salma Ahmed Abd EL-Shahid</td>
+          <td>420230164</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
 </body>
